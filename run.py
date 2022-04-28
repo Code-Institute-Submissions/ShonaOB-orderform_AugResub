@@ -1,5 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import datetime
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -34,8 +36,23 @@ def get_delivery_date():
     print("The date should be in the format DD/MM/YYYY")
     print("for example: 01/04/2022 \n")
 
+    global delivery_date
     delivery_date = input("Enter your required delivery date:\n")
     print(f"You have requested a delivery on the {delivery_date}\n")
+    return delivery_date
+
+
+def date_format(delivery_date):
+    """
+    Convert the date string into datetime format
+    """
+    try: 
+        date = datetime.datetime.strptime(delivery_date, "%d %B, %Y")
+    except ValueError:
+        date = None
+    return date
+    print(f" the date you have chosen is: {date}")
+
 
 
 
@@ -43,3 +60,4 @@ def get_delivery_date():
 
 get_school_name()
 get_delivery_date()
+date_format(delivery_date)
