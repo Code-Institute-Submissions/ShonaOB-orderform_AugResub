@@ -54,10 +54,22 @@ def date_format(delivery_date):
     print(f" the date you have chosen is: {date}")
 
 
+def update_worksheet(data):
+    """
+    update worksheet with school name and date
+    """
+    print("Adding school name to order worksheet....")
+    order_worksheet = SHEET.worksheet("orders")
+    order_worksheet.append_row(data)
+    print("School name added successfully...\n")
 
 
+def main ():
+    data = [get_school_name(), get_delivery_date()]
+    school = get_school_name()
+    del_date = get_delivery_date()
+    date_for_sheet = date_format(delivery_date)
+    update_worksheet(data)
 
 
-get_school_name()
-get_delivery_date()
-date_format(delivery_date)
+main()
