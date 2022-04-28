@@ -12,8 +12,17 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('order-form')
 
-orders = SHEET.worksheet('orders')
 
-data = orders.get_all_values()
+def get_school_name():
+    """
+    Get the name of the school this order is for from the user
+    """
+    print("Please enter the school name")
+    print("The name of the school should start with the County")
+    print("for example: Dublin St. Mary's NS \n")
 
-print(data)
+    school_name_str = input("Enter your school name here:\n")
+    print(f"The school name you have provided is {school_name_str}")
+
+
+get_school_name()
