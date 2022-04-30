@@ -64,10 +64,8 @@ def update_worksheet(data):
     print("School name added successfully...\n")
 
 
-def main ():
+def main():
     data = [get_school_name(), get_delivery_date()]
-    school = get_school_name()
-    del_date = get_delivery_date()
     date_for_sheet = date_format(delivery_date)
     update_worksheet(data)
 
