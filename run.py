@@ -24,7 +24,7 @@ def get_school_name():
     print("Please note! Delivery is currently only available in Dublin and Offaly.")
     print("for example: Dublin St. Mary's NS \n")
 
-    school_name_str = input("Enter your school name here:\n")
+    school_name_str = input("Enter your school name here:\n").capitalize()
     client_counties = ["Offaly", "Dublin"]
     
     if any(county in school_name_str for county in client_counties):
