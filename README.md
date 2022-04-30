@@ -1,5 +1,35 @@
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
+https://stackoverflow.com/questions/6531482/how-to-check-if-a-string-contains-an-element-from-a-list-in-python
+
+date validation: 
+https://www.tutsmake.com/python-program-to-check-the-given-date-is-valid-or-not/
+dd,mm,yy=delivery_date.split('/')
+    dd=int(dd)
+    mm=int(mm)
+    yy=int(yy)
+    if(mm==1 or mm==3 or mm==5 or mm==7 or mm==8 or mm==10 or mm==12):
+        max1=31
+    elif(mm==4 or mm==6 or mm==9 or mm==11):
+        max1=30
+    elif(yy%4==0 and yy%100!=0 or yy%400==0):
+        max1=29
+    else:
+        max1=28
+    if(mm<1 or mm>12):
+        print("Date is invalid.")
+    elif(dd<1 or dd>max1):
+        print("Date is invalid.")
+    elif(dd==max1 and mm!=12):
+        dd=1
+        mm=mm+1
+        print("The date is: ",dd,mm,yy)
+    elif(dd==31 and mm==12):
+        dd=1
+        mm=1
+        yy=yy+1
+        print("The date is: ",dd,mm,yy)
+
 Welcome ShonaOB,
 
 This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**

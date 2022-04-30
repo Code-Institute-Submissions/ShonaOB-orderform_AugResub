@@ -47,20 +47,11 @@ def get_delivery_date():
 
     global delivery_date
     delivery_date = input("Enter your required delivery date:\n")
+    # CREDIT: this code to validate the date was taken from tutsmake.com 
+    # see README for details
+    
     print(f"You have requested a delivery on the {delivery_date}\n")
     return delivery_date
-
-
-def date_format(delivery_date):
-    """
-    Convert the date string into datetime format
-    """
-    try: 
-        date = datetime.datetime.strptime(delivery_date, "%d %B, %Y")
-    except ValueError:
-        date = None
-    return date
-    print(f" the date you have chosen is: {date}")
 
 
 def get_order_detail():
@@ -86,7 +77,6 @@ def update_worksheet(data):
 
 def main():
     data = [get_school_name(), get_delivery_date(), get_order_detail()]
-    date_for_sheet = date_format(delivery_date)
     update_worksheet(data)
 
 
