@@ -54,18 +54,29 @@ def date_format(delivery_date):
     print(f" the date you have chosen is: {date}")
 
 
+def get_order_detail():
+    """
+    Get the order for the school from the user
+    """
+    print("Please enter the order detail")
+
+    order_detail_str = input("Enter your order detail here:\n")
+    print(f"The order you have placed is {order_detail_str}\n")
+    return order_detail_str
+
+
 def update_worksheet(data):
     """
-    update worksheet with school name and date
+    update worksheet with school name and date and order
     """
-    print("Adding school name to order worksheet....")
+    print("Adding order to order worksheet....")
     order_worksheet = SHEET.worksheet("orders")
     order_worksheet.append_row(data)
-    print("School name added successfully...\n")
+    print("Order added successfully...\n")
 
 
 def main():
-    data = [get_school_name(), get_delivery_date()]
+    data = [get_school_name(), get_delivery_date(), get_order_detail()]
     date_for_sheet = date_format(delivery_date)
     update_worksheet(data)
 
