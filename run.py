@@ -20,10 +20,19 @@ def get_school_name():
     Get the name of the school this order is for from the user
     """
     print("Please enter the school name")
-    print("The name of the school should start with the County")
+    print("The name of the school should start with the County.")
+    print("Please note! Delivery is currently only available in Dublin and Offaly.")
     print("for example: Dublin St. Mary's NS \n")
 
     school_name_str = input("Enter your school name here:\n")
+    client_counties = ["Offaly", "Dublin"]
+    
+    if any(county in school_name_str for county in client_counties):
+        print("Great! We deliver to that county!\n")
+    else: 
+        print("Oops! You did not enter a county, or you entered a county that we do not deliver to! Try again...\n")
+        main()
+
     print(f"The school name you have provided is {school_name_str}\n")
     return school_name_str
 
