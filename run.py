@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import datetime
+import random
 
 
 SCOPE = [
@@ -19,16 +20,20 @@ def get_school_name():
     """
     Get the name of the school this order is for from the user
     """
+    global school_name_str
+    global county
     print("Please enter the school name")
     print("The name of the school should start with the County.")
     print("Please note! Delivery is currently only available in Dublin and Offaly.")
     print("for example: Dublin St. Mary's NS \n")
 
     school_name_str = input("Enter your school name here:\n").capitalize()
+    split = school_name_str.split()
+    county = split[0]
     client_counties = ["Offaly", "Dublin"]
     
     if any(county in school_name_str for county in client_counties):
-        print("Great! We deliver to that county!\n")
+        print(f"Great! We deliver to that county! {county}\n")
     else: 
         print("Oops! You did not enter a county, or you entered a county that we do not deliver to! Try again...\n")
         main()
@@ -36,6 +41,11 @@ def get_school_name():
     print(f"The school name you have provided is {school_name_str}\n")
     return school_name_str
 
+
+def production_run(): 
+    random_no = random.randint(0,200)
+    prun = county + " " + str(random_no)
+    print(prun) 
 
 def get_delivery_date():
     """
@@ -76,7 +86,7 @@ def update_worksheet(data):
 
 
 def main():
-    data = [get_school_name(), get_delivery_date(), get_order_detail()]
+    data = [get_school_name(), production_run(), get_delivery_date(), get_order_detail()]
     update_worksheet(data)
 
 
