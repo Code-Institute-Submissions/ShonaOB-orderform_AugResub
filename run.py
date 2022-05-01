@@ -7,7 +7,7 @@ SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
-    ]
+]
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
@@ -50,7 +50,7 @@ def production_run():
     """
     random_no = random.randint(0, 200)
     prun = county + " " + str(random_no)
-    print(prun)
+    return prun
 
 
 def get_delivery_date():
@@ -65,38 +65,38 @@ def get_delivery_date():
     delivery_date = input("Enter your required delivery date:\n")
     # CREDIT: this code to validate the date was taken from tutsmake.com
     # see README for details
-    dd,mm,yy=delivery_date.split('/')
-    dd=int(dd)
-    mm=int(mm)
-    yy=int(yy)
-    if(mm==1 or mm==3 or mm==5 or mm==7 or mm==8 or mm==10 or mm==12):
-        max1=31
-    elif(mm==4 or mm==6 or mm==9 or mm==11):
-        max1=30
-    elif(yy%4==0 and yy%100!=0 or yy%400==0):
-        max1=29
+    dd, mm, yy = delivery_date.split('/')
+    dd = int(dd)
+    mm = int(mm)
+    yy = int(yy)
+    if(mm == 1 or mm == 3 or mm == 5 or mm == 7 or mm == 8 or mm == 10 or mm == 12):
+        max1 = 31
+    elif(mm == 4 or mm == 6 or mm == 9 or mm == 11):
+        max1 = 30
+    elif(yy % 4 == 0 and yy % 100 != 0 or yy % 400 == 0):
+        max1 = 29
     else:
-        max1=28
-    if(mm<1 or mm>12):
+        max1 = 28
+    if(mm < 1 or mm > 12):
         print("Date is invalid.")
         get_delivery_date()
-    elif(dd<1 or dd>max1):
+    elif(dd < 1 or dd > max1):
         print("Date is invalid.")
         get_delivery_date()
-    elif(dd==max1 and mm!=12):
-        dd=1
-        mm=mm+1
-        print("The date is: ",dd,mm,yy)
-    elif(dd==31 and mm==12):
-        dd=1
-        mm=1
-        yy=yy+1
-        print("The date is: ",dd,mm,yy)
+    elif(dd == max1 and mm != 12):
+        dd = 1
+        mm = mm + 1
+        print("The date is: ", dd, mm, yy)
+    elif(dd == 31 and mm == 12):
+        dd = 1
+        mm = 1
+        yy = yy + 1
+        print("The date is: ", dd, mm, yy)
     else:
-	    dd=dd
-	    print("The delivery date is: ",dd,mm,yy)
+        dd = dd
+        print("The delivery date is: ", dd, mm, yy)
 
-    #print(f"You have requested a delivery on the {delivery_date}\n")
+    # print(f"You have requested a delivery on the {delivery_date}\n")
     return delivery_date
 
 
@@ -125,7 +125,11 @@ def main():
     """
     Runs the main program
     """
-    data = [get_school_name(), production_run(), get_delivery_date(), get_order_detail()]
+    data = [
+        get_school_name(),
+        get_delivery_date(),
+        get_order_detail(),
+        production_run(),]
     update_worksheet(data)
 
 
