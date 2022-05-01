@@ -1,5 +1,5 @@
 import random
-import datetime
+from datetime import datetime
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -95,9 +95,14 @@ def get_delivery_date():
     else:
         dd = dd
         print("The delivery date is: ", dd, mm, yy)
-
-    # print(f"You have requested a delivery on the {delivery_date}\n")
-    return delivery_date
+    date_format = "%d/%m/%Y"
+    start = datetime.strptime(delivery_date, date_format)
+    now = datetime.now()
+    if start < now:
+        print("You must pick a date in the future")
+        get_delivery_date()
+    else: 
+    	    return delivery_date
 
 
 def get_order_detail():
