@@ -69,7 +69,10 @@ def get_delivery_date():
     dd = int(dd)
     mm = int(mm)
     yy = int(yy)
-    if(mm == 1 or mm == 3 or mm == 5 or mm == 7 or mm == 8 or mm == 10 or mm == 12):
+    if(mm == 1 or mm == 3 or
+       mm == 5 or mm == 7 or
+       mm == 8 or mm == 10 or
+       mm == 12):
         max1 = 31
     elif(mm == 4 or mm == 6 or mm == 9 or mm == 11):
         max1 = 30
@@ -101,8 +104,8 @@ def get_delivery_date():
     if start < now:
         print("You must pick a date in the future")
         get_delivery_date()
-    else: 
-    	    return delivery_date
+    else:
+        return delivery_date
 
 
 def get_order_detail():
@@ -134,7 +137,7 @@ def main():
         get_school_name(),
         get_delivery_date(),
         get_order_detail(),
-        production_run(),]
+        production_run(), ]
     update_worksheet(data)
 
 

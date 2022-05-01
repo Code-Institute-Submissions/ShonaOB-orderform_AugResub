@@ -56,6 +56,7 @@
     <li>Provided invalid inputs at all stages of building this program to identify bugs; invalid county, invalid date.</li>
     <li>Tested in my local terminal and the Heroke Terminal</li>
 </ul>
+<img src='pep8check.JPG'>
 <h2>Bugs</h2>
 <h3>Solved Bugs</h3>
 <ul>
