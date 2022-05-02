@@ -94,7 +94,6 @@ def get_delivery_date():
         dd = 1
         mm = 1
         yy = yy + 1
-        print("The date is: ", dd, mm, yy)
     else:
         dd = dd
         print("The delivery date is: ", dd, mm, yy)
@@ -102,7 +101,7 @@ def get_delivery_date():
     start = datetime.strptime(delivery_date, date_format)
     now = datetime.now()
     if start < now:
-        print("You must pick a date in the future")
+        print("Oops! You must pick a date in the future\n")
         get_delivery_date()
     else:
         return delivery_date
@@ -127,12 +126,14 @@ def update_worksheet(data):
     order_worksheet = SHEET.worksheet("orders")
     order_worksheet.append_row(data)
     print("Order added successfully...\n")
+    main()
 
 
 def main():
     """
     Runs the main program
     """
+    print("Welcome to the Order Form App!\n")
     data = [
         get_school_name(),
         get_delivery_date(),
