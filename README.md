@@ -86,6 +86,7 @@
 <ul>
     <li>When writing this program I came across an issue with validating the date so that it was both in the future and also a valid format. I resolved this by using date format validation code (credit below) and by converting the date string to a date object and checking this against today's date.</li>
     <li>Halfway through the project, the data started to be written to the wrong column in GoogleSheets. This was identified to be the order in which the functions were written inside main() and this was resolved. </li>
+    <li>When I initially submitted this project I had not checked for a user trying to enter an "empty" input. The result of such an action caused the application to crash. Upon review of the issue, I added an error check to the get_school_name function to check for empty input and provide the user with feedback on the error. This has resolved the issue.</li>
 </ul>
 <h3>Remaining Bugs</h3>
 <ul>

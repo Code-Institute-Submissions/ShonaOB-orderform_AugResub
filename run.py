@@ -28,15 +28,32 @@ def get_school_name():
     print("for example: Dublin St. Mary's NS ")
 
     school_name_str = input("Enter your school name here:\n").capitalize()
+    if len(school_name_str) == 0:
+        print("Oops! You did not enter a valid school name!\n")
+        print("You will need to start again! \n")
+        main()
+    elif school_name_str == " ":
+        print("Oops! You did not enter a valid school name!\n")
+        print("You will need to start again! \n")
+        main()
+    elif school_name_str == "  ":
+        print("Oops! You did not enter a valid school name!\n")
+        print("You will need to start again! \n")
+        main()
+    elif school_name_str == "   ":
+        print("Oops! You did not enter a valid school name!\n")
+        print("You will need to start again! \n")
+        main()
+    else:
+        print("checking...")
     split = school_name_str.split()
     county = split[0]
     client_counties = ["Offaly", "Dublin"]
-
     if any(county in school_name_str for county in client_counties):
         print(f"Great! We deliver to that county! {county}\n")
     else:
-        print("Oops! You did not enter a county\n")
-        print("or you entered a county that we do not deliver to!")
+        print("Oops! You did not enter a county")
+        print("or you entered a county that we do not deliver to!\n")
         print("Try again...\n")
         main()
 
