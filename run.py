@@ -48,7 +48,7 @@ def get_school_name():
         print("checking...")
     split = school_name_str.split(" ")
     county = split[0]
-    scl = split[1]
+    scl = split[1] + split[2]
     if len(scl) == 0 or len(scl) < 5:
         print("Oops! You did not enter a valid school name! Try again...\n")
         get_school_name()
@@ -88,6 +88,12 @@ def get_delivery_date():
     delivery_date = input("Enter your required delivery date:\n")
     # CREDIT: this code to validate the date was taken from tutsmake.com
     # see README for details
+    if len(delivery_date) == 0:
+        print("You have not entered a date. Please try again \n")
+        get_delivery_date()
+    if "/" not in delivery_date:
+        print("You have not entered a date. Please try again \n")
+        get_delivery_date()
     dd, mm, yy = delivery_date.split('/')
     dd = int(dd)
     mm = int(mm)
@@ -137,6 +143,9 @@ def get_order_detail():
     print("Please enter the order detail")
 
     order_detail_str = input("Enter your order detail here:\n")
+    if len(order_detail_str) == 0 or len(order_detail_str) < 10:
+        print("You must enter more order details....\n")
+        get_order_detail()
     print(f"The order you have placed is {order_detail_str}\n")
     return order_detail_str
 
