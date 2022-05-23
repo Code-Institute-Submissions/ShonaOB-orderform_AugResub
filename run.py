@@ -22,7 +22,7 @@ def get_school_name():
     global school_name_str
     global county
     print("Please enter the school name")
-    print("The name of the school should start with the County.\n")
+    print("The name of the school should start with the County and must be longer than 5 characters.\n")
     print("Please note! Delivery is currently")
     print("only available in Dublin and Offaly.")
     print("for example: Dublin St. Mary's NS ")
@@ -46,8 +46,14 @@ def get_school_name():
         main()
     else:
         print("checking...")
-    split = school_name_str.split()
+    split = school_name_str.split(" ")
     county = split[0]
+    scl = split[1]
+    if len(scl) == 0 or len(scl) < 5:
+        print("Oops! You did not enter a valid school name! Try again...\n")
+        get_school_name()
+    else: 
+        print(f"School Name: {scl}")
     client_counties = ["Offaly", "Dublin"]
     if any(county in school_name_str for county in client_counties):
         print(f"Great! We deliver to that county! {county}\n")
