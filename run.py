@@ -44,12 +44,16 @@ def get_school_name():
         print("Oops! You did not enter a valid school name!\n")
         print("You will need to start again! \n")
         main()
+    elif " " not in school_name_str:
+        print("Oops! You did not fill in the school name correctly. Please try again.\n")
+        main()
     else:
         print("checking...")
     split = school_name_str.split(" ")
     county = split[0]
-    scl = split[1] + split[2]
-    if len(scl) == 0 or len(scl) < 5:
+    scl = split[1]
+    scl_second = split[2]
+    if len(scl) == 0:
         print("Oops! You did not enter a valid school name! Try again...\n")
         get_school_name()
     else: 
@@ -63,7 +67,7 @@ def get_school_name():
         print("Try again...\n")
         main()
 
-    print(f"The school name you have provided is {school_name_str}\n")
+    print(f"The school name you have provided is {scl} {scl_second}\n")
     return school_name_str
 
 
@@ -92,7 +96,10 @@ def get_delivery_date():
         print("You have not entered a date. Please try again \n")
         get_delivery_date()
     if "/" not in delivery_date:
-        print("You have not entered a date. Please try again \n")
+        print("You have not entered a vaild date format. Please try again \n")
+        get_delivery_date()
+    if len(delivery_date) < 10:
+        print("You have not entered a valid date format. Remember to use format dd/mm/yyyy Please try again \n")
         get_delivery_date()
     dd, mm, yy = delivery_date.split('/')
     dd = int(dd)
