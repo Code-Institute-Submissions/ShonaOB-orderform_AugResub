@@ -15,19 +15,42 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('order-form')
 
 
-def get_school_name():
+def get_county_name():
+    """
+    Get the county of the school this order is for from the user
+    """
+    global county
+
+    print("Please enter the County where the school is located.")
+    print("Please note! Delivery is currently")
+    print("only available in Dublin and Offaly.")
+    county_str = input("Enter your COUNTY here:\n").capitalize()
+    #return county_str
+    if len(county_str) == 0:
+        print("Oh no! You have not entered a county. Please try again.")
+        main()
+
+    client_counties = ["Offaly", "Dublin"]
+    if any(county in county_str for county in client_counties):
+        print(f"Great! We deliver to that county! {county_str}\n")
+    else:
+        print("Oops! You did not enter a county")
+        print("or you entered a county that we do not deliver to!\n")
+        print("Try again...\n")
+        main()
+
+
+def get_school_name(): 
     """
     Get the name of the school this order is for from the user
     """
-    global school_name_str
-    global county
-    print("Please enter the school name")
-    print("The name of the school should start with the County and must be longer than 5 characters.\n")
-    print("Please note! Delivery is currently")
-    print("only available in Dublin and Offaly.")
-    print("for example: Dublin St. Mary's NS ")
 
+    global school_name_str
+    print(".............................................................")
+    print("Please enter the school name")
+    print("The name of the school must be longer than 5 characters.\n")
     school_name_str = input("Enter your school name here:\n").capitalize()
+    #return school_name_str
     if len(school_name_str) == 0:
         print("Oops! You did not enter a valid school name!\n")
         print("You will need to start again! \n")
@@ -49,34 +72,19 @@ def get_school_name():
         main()
     else:
         print("checking...")
-    split = school_name_str.split(" ")
-    county = split[0]
-    scl = split[1]
-    scl_second = split[2]
-    if len(scl) == 0:
+    if len(school_name_str) < 5:
         print("Oops! You did not enter a valid school name! Try again...\n")
         get_school_name()
-    else: 
-        print(f"School Name: {scl}")
-    client_counties = ["Offaly", "Dublin"]
-    if any(county in school_name_str for county in client_counties):
-        print(f"Great! We deliver to that county! {county}\n")
     else:
-        print("Oops! You did not enter a county")
-        print("or you entered a county that we do not deliver to!\n")
-        print("Try again...\n")
-        main()
-
-    print(f"The school name you have provided is {scl} {scl_second}\n")
-    return school_name_str
+        print(f"School Name: {school_name_str}")
 
 
 def production_run():
     """
-    Assigns a random number and the county to create a production run
+    Assigns a random number and the letter P to create a production run
     """
     random_no = random.randint(0, 200)
-    prun = county + " " + str(random_no)
+    prun = "P" + str(random_no)
     return prun
 
 
@@ -84,6 +92,7 @@ def get_delivery_date():
     """
     Get the date of the delivery from the user and validate it also
     """
+    print(".............................................................")
     print("Please enter the required delivery date for this order")
     print("The date should be in the format DD/MM/YYYY")
     print("for example: 01/04/2022 \n")
@@ -147,6 +156,7 @@ def get_order_detail():
     """
     Get the order for the school from the user
     """
+    print(".............................................................")
     print("Please enter the order detail")
 
     order_detail_str = input("Enter your order detail here:\n")
@@ -164,7 +174,7 @@ def update_worksheet(data):
     print("Adding order to order worksheet....")
     order_worksheet = SHEET.worksheet("orders")
     order_worksheet.append_row(data)
-    print("Order added successfully...\n")
+    print("Order added successfully!\n")
     main()
 
 
@@ -173,12 +183,15 @@ def main():
     Runs the main program
     """
     print("Welcome to the Order Form App!\n")
+    print("................................................\n")
     data = [
+        get_county_name(),
         get_school_name(),
         get_delivery_date(),
         get_order_detail(),
         production_run(), ]
     update_worksheet(data)
+    print("DONE")
 
 
 main()
