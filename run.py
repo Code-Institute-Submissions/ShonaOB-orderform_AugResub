@@ -25,7 +25,6 @@ def get_county_name():
     print("Please note! Delivery is currently")
     print("only available in Dublin and Offaly.")
     county_str = input("Enter your COUNTY here:\n").capitalize()
-    #return county_str
     if len(county_str) == 0:
         print("Oh no! You have not entered a county. Please try again.")
         main()
@@ -40,7 +39,7 @@ def get_county_name():
         main()
 
 
-def get_school_name(): 
+def get_school_name():
     """
     Get the name of the school this order is for from the user
     """
@@ -50,7 +49,6 @@ def get_school_name():
     print("Please enter the school name")
     print("The name of the school must be longer than 5 characters.\n")
     school_name_str = input("Enter your school name here:\n").capitalize()
-    #return school_name_str
     if len(school_name_str) == 0:
         print("Oops! You did not enter a valid school name!\n")
         print("You will need to start again! \n")
@@ -68,7 +66,8 @@ def get_school_name():
         print("You will need to start again! \n")
         main()
     elif " " not in school_name_str:
-        print("Oops! You did not fill in the school name correctly. Please try again.\n")
+        print("Oops! You did not fill in the school name correctly.")
+        print("Please try again.\n")
         main()
     else:
         print("checking...")
@@ -108,7 +107,8 @@ def get_delivery_date():
         print("You have not entered a vaild date format. Please try again \n")
         get_delivery_date()
     if len(delivery_date) < 10:
-        print("You have not entered a valid date format. Remember to use format dd/mm/yyyy Please try again \n")
+        print("You have not entered a valid date format.")
+        print("Remember to use format dd/mm/yyyy Please try again \n")
         get_delivery_date()
     dd, mm, yy = delivery_date.split('/')
     dd = int(dd)
