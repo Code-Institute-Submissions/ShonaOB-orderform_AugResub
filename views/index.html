@@ -1,30 +1,27 @@
-// ===================================================
-// Total.js start script
-// https://www.totaljs.com
-// ===================================================
+<body>
+    <button onclick="window.location.reload()">Run Program</button>
+    <div id="terminal"></div>
 
-const options = {};
+    <script>
+        var term = new Terminal({
+            cols: 80,
+            rows: 24
+        });
+        term.open(document.getElementById('terminal'));
+        term.writeln('Running startup command: python3 run.py');
+        term.writeln('');
 
-// options.ip = '127.0.0.1';
-options.port = parseInt(process.env.PORT);
-// options.unixsocket = require('path').join(require('os').tmpdir(), 'app_name');
-// options.config = { name: 'Total.js' };
-// options.sleep = 3000;
-// options.inspector = 9229;
-// options.watch = ['private'];
-// options.livereload = 'https://yourhostname';
+        var ws = new WebSocket(location.protocol.replace('http', 'ws') + '//' + location.hostname + (location.port ? (
+            ':' + location.port) : '') + '/');
 
-// Enables cluster:
-// options.cluster = 'auto';
-// options.cluster_limit = 10; // max 10. threads (works only with "auto" scaling)
+        ws.onopen = function () {
+            new attach.attach(term, ws);
+        };
 
-// Enables threads:
-// options.cluster = 'auto';
-// options.cluster_limit = 10; // max 10. threads (works only with "auto" scaling)
-// options.timeout = 5000;
-// options.threads = '/api/';
-// options.logs = 'isolated';
-
-var type = process.argv.indexOf('--release', 1) !== -1 || process.argv.indexOf('release', 1) !== -1 ? 'release' : 'debug';
-// require('total4/' + type)(options);
-require('total4').http('release', options);
+        ws.onerror = function (e) {
+            console.log(e);
+        };
+        // Set focus in the terminal
+        document.getElementsByClassName("xterm-helper-textarea")[0].focus();
+    </script>
+</body>
